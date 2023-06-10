@@ -3,15 +3,14 @@ import "./App.css"
 import BmiResult from "./components/BmiResult"
 import UserInput from "./components/UserInput"
 import { Button } from "react-bootstrap"
-import ThemeSwitcher from "./components/ThemeSwitcher"
 function App() {
   const [bmi, setBmi] = useState(0)
-  const heightRef = useRef(null)
-  const weightRef = useRef(null)
+  const heightRef = useRef<HTMLInputElement>(null)
+  const weightRef = useRef<HTMLInputElement>(null)
   const calculateBMI = () => {
     const weight = weightRef.current?.value || 0
     const height = heightRef.current?.value || 0
-    if (weight <= 0 || height <= 0) {
+    if (Number(weight) <= 0 || Number(height) <= 0) {
       alert("Weight and height must be greater than or equal to zero.")
       setBmi(0)
     } else {
@@ -22,8 +21,8 @@ function App() {
   }
 
   const clearInputs = () => {
-    weightRef.current.value = 0
-    heightRef.current.value = 0
+    weightRef.current!.value = ""
+    heightRef.current!.value = ""
     setBmi(0)
   }
 
